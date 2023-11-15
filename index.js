@@ -1,7 +1,7 @@
-import express from "express";
-import Boom from "@hapi/boom";
-import morgan from "morgan";
-import persistence from "./persistence/index.js";
+import express from 'express';
+import Boom from '@hapi/boom';
+import morgan from 'morgan'
+import persistence from './persistence/index.js'
 
 const PORT = 3000;
 
@@ -21,21 +21,15 @@ app.use((_, res, next) => {
   next();
 });
 
-app.get(
-  "/animals",
-  asyncMiddleware(async (_, res) => {
-    const animals = await persistence.getAnimals();
-    res.json(animals);
-  })
-);
+app.get('/animals', asyncMiddleware(async (_, res) => {
+  const animals = await persistence.getAnimals();
+  res.json(animals);
+}));
 
-app.get(
-  "/animals/:id",
-  asyncMiddleware(async (req, res) => {
-    const animal = await persistence.getAnimal(Number(req.params.id));
-    res.json(animal);
-  })
-);
+app.get('/animals/:id', asyncMiddleware(async (req, res) => {
+  const animal = await persistence.getAnimal(Number(req.params.id));
+  res.json(animal);
+}));
 
 app.use((err, _, res, next) => {
   res.status(Boom.isBoom(err) ? err.output.statusCode : 500).json({
