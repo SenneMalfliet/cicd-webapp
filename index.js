@@ -13,11 +13,11 @@ function asyncMiddleware(fn) {
 
 const app = express();
 
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.use((_, res, next) => {
-  res.set("X-Database-Used", process.env.MONGO_URL ? "MongoDB" : "SQLite");
+  res.set('X-Database-Used', process.env.MONGO_URL ? 'MongoDB' : 'SQLite');
   next();
 });
 
@@ -46,7 +46,7 @@ persistence
     });
   })
   .catch((err) => {
-    console.error("Database failed to connect, check the error below");
+    console.error('Database failed to connect, check the error below');
     console.error(err);
     process.exit(1);
   });

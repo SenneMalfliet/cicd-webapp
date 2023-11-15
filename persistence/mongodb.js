@@ -8,16 +8,16 @@ export async function initialize() {
   client = new MongoClient(process.env.MONGO_URL, { authSource: 'admin', });
   await client.connect();
 
-  const animals = client.db().collection("animals");
+  const animals = client.db().collection('animals');
 
   const count = await animals.countDocuments();
   if (count === 0) {
     await animals.createIndex({ id: 1 }, { unique: true });
     await animals.insertMany(generateFakeData());
-    console.log("Fake data generated");
+    console.log('Fake data generated');
   }
 
-  console.log("MongoDB database initialized");
+  console.log('MongoDB database initialized');
 }
 
 export async function close() {
@@ -31,9 +31,9 @@ export async function getAnimals() {
 }
 
 export async function getAnimal(id) {
-  const animal = await client.db().collection("animals").findOne({ id: id });
+  const animal = await client.db().collection('animals').findOne({ id: id });
   if (!animal) {
-    throw Boom.notFound("Animal not found");
+    throw Boom.notFound('Animal not found');
   }
   return {
     id: animal.id,
