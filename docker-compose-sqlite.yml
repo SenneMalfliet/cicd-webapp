@@ -1,0 +1,10 @@
+services:
+  app:
+    image: "nodejs"
+    ports: 
+      - 3000:3000
+    volumes:
+      - db_volume:/app/database
+
+volumes:
+  db_volume:

@@ -1,0 +1,27 @@
+services:
+  app:
+    image: "webapp"
+    ports: 
+      - 3000:3000
+    volumes:
+      - db_volume:/data/db
+    environment:
+      - MONGO_URL=mongodb://database
+    depends_on:
+      - database
+
+  database:
+    image: "mongo:4.4.18"
+    ports:
+      - 27017:27017
+
+  test:
+    image: "webapp"
+    environment:
+      - API_URL=http://app:3000
+    depends_on:
+      - app
+    command: yarn test
+
+volumes:
+  db_volume:
