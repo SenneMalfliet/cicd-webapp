@@ -6,7 +6,7 @@ import animal from '@fakerjs/animal';
  *
  * @param {Number} nrOfAnimals - Number of animals to generate
  */
-export default (nrOfAnimals = 10) => {
+export default (nrOfAnimals = 15) => {
   const animals = [];
   for (let i = 1; i <= nrOfAnimals; i++) {
     animals.push({
